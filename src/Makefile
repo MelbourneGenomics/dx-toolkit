@@ -185,6 +185,7 @@ endif
 	# On OS X, install the gnureadline package
 ifeq ($(UNAME), Darwin)
 	unset PYTHONPATH; source "$(DX_PY_ENV)/$(ACTIVATE)"; pip install --no-cache-dir --prefix="$(DNANEXUS_HOME)" -r python/requirements_readline.txt
+	pip download --no-cache-dir -d "($DNANEXUS_HOME)"/osx-python-packages ndg-httpsclient==0.4.2 
 endif
 
 	# Build the dxpy wheel and move it into place
