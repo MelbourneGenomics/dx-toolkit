@@ -83,7 +83,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
         # Install all tar packages only for osx python virtual environment
         for PACKAGE_NAME in osx-python-packages/*.gz
         do
-          pip install --no-cache --no-index --find-links=osx-python-packages/ "$PACKAGE_NAME"
+          pip install --no-cache-dir --no-index --find-links=osx-python-packages/ "$PACKAGE_NAME"
         done
     else
         source "$VIRTUALENV_DIR/bin/activate"
