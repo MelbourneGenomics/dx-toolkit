@@ -21,7 +21,7 @@ Utilities for client-side usage of the streaming log API
 
 from __future__ import print_function, unicode_literals, division, absolute_import
 
-import json, logging, time
+import json, logging, time, ssl
 
 #from ws4py.client.threadedclient import WebSocketClient
 from ws4py.client import WebSocketBaseClient
@@ -51,7 +51,23 @@ class DXJobLogStreamClient(WebSocketBaseClient):
                                                                                  host=dxpy.APISERVER_HOST,
                                                                                  port=dxpy.APISERVER_PORT,
                                                                                  job_id=job_id)
+        self.check_openssl_supports_tls_version_1_2()
         WebSocketBaseClient.__init__(self, self.url, protocols=None, extensions=None)
+
+    def check_openssl_supports_tls_version_1_2(self):
+        try:
+            openssl_version_tuple = ssl.OPENSSL_VERSION_INFO
+            if openssl_version_tuple[0] < 1 or openssl_version_tuple[2] < 1:
+                raise Exception(
+                    'Currently installed openssl version: %s does not '
+                    'support TLS 1.2, which is required for use of dx watch '
+                    'Please use python installed with openssl version 1.0.1 or '
+                    'higher.' % (ssl.OPENSSL_VERSION)
+                )
+        # We cannot check the openssl version on python2.6, so we should just
+        # pass on this conveniency check.
+        except AttributeError:
+            pass
 
     def handshake_ok(self):
         self.run()
