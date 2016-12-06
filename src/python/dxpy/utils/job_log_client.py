@@ -21,7 +21,10 @@ Utilities for client-side usage of the streaming log API
 
 from __future__ import print_function, unicode_literals, division, absolute_import
 
-import json, logging, time, ssl
+import json
+import logging
+import time
+import ssl
 
 #from ws4py.client.threadedclient import WebSocketClient
 from ws4py.client import WebSocketBaseClient
