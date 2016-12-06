@@ -62,9 +62,9 @@ class DXJobLogStreamClient(WebSocketBaseClient):
             openssl_version_tuple = ssl.OPENSSL_VERSION_INFO
             if openssl_version_tuple[0] < 1 or openssl_version_tuple[2] < 1:
                 err_exit(message='Currently installed openssl version: %s does not '
-                    'support TLS 1.2, which is required for use of dx watch '
-                    'Please use python installed with openssl version 1.0.1 or '
-                    'higher.' % (ssl.OPENSSL_VERSION), code=3)
+                        'support TLS 1.2, which is required for use of dx watch '
+                        'Please use python installed with openssl version 1.0.1 or '
+                        'higher.' % (ssl.OPENSSL_VERSION), code=3)
         # We cannot check the openssl version on python2.6, so we should just
         # pass on this conveniency check.
         except AttributeError:
