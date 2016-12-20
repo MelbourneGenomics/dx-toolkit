@@ -2191,7 +2191,7 @@ class TestHTTPResponses(unittest.TestCase):
             with self.assertRaisesRegexp(SSLError, "file"):
                 dxpy.DXHTTPRequest("/system/whoami", {}, verify="nonexistent")
             with self.assertRaisesRegexp((SSLError, IOError), "file"):
-                dxpy.DXHTTPRequest("/system/whoami", {}, cert_file="nonexistent")
+                dxpy.DXHTTPRequest("/system/whoami", {}, cert_file=None)
 
     def test_fake_errors(self):
         dxpy.DXHTTPRequest('/system/fakeError', {'errorType': 'Valid JSON'}, always_retry=True)
