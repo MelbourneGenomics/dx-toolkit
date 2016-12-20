@@ -28,6 +28,7 @@ import re
 
 import requests
 from requests.packages.urllib3.exceptions import SSLError
+import OpenSSL
 
 import dxpy
 import dxpy_testutil as testutil
@@ -2190,8 +2191,8 @@ class TestHTTPResponses(unittest.TestCase):
         if dxpy.APISERVER_PROTOCOL == "https":
             with self.assertRaisesRegexp(SSLError, "file"):
                 dxpy.DXHTTPRequest("/system/whoami", {}, verify="nonexistent")
-            with self.assertRaisesRegexp((SSLError, IOError), "file"):
-                dxpy.DXHTTPRequest("/system/whoami", {}, cert_file=None)
+            with self.assertRaisesRegexp((SSLError, IOError, OpenSSL.SSL.Error), "file"):
+                dxpy.DXHTTPRequest("/system/whoami", {}, cert_file="nonexistent")
 
     def test_fake_errors(self):
         dxpy.DXHTTPRequest('/system/fakeError', {'errorType': 'Valid JSON'}, always_retry=True)
