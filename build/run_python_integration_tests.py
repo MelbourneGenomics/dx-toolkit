@@ -38,7 +38,6 @@ parser.add_argument(
 TOOLKIT_ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 PYTHON_DIR = os.path.join(TOOLKIT_ROOT_DIR, 'src', 'python')
 PYTHON_TEST_DIR = os.path.join(PYTHON_DIR, 'test')
-ENVIRONMENT_PATH = os.path.join(TOOLKIT_ROOT_DIR, 'environment')
 os.environ['DNANEXUS_INSTALL_PYTHON_TEST_DEPS'] = 'yes'
 
 def run():
